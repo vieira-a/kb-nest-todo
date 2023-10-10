@@ -11,6 +11,6 @@ export class TaskRepository {
   }
 
   async dbLoadTask() {
-    return this.tasks
+    return this.tasks;
   }
 }

@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { Task } from './task.model';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { TaskRepository } from './task.repository';
 
@@ -15,7 +14,7 @@ export class TaskController {
 
   @Get()
   async loadTask() {
-    const taskList = this.taskRepository.dbLoadTask()
-    return taskList
+    const taskList = this.taskRepository.dbLoadTask();
+    return taskList;
   }
 }
