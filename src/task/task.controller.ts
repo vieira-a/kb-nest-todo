@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Res } from '@nestjs/common';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 import { TaskRepository } from './task.repository';
@@ -11,7 +11,7 @@ export class TaskController {
   constructor(private readonly taskRepository: TaskRepository) {}
 
   @Post()
-  async addTask(@Body() task: AddTaskDTO): Promise<LoadTaskDTO> {
+  async addTask(@Body() task: AddTaskDTO) {
     
     const newTask = new TaskEntity();
     newTask.id = uuidv4()
@@ -22,8 +22,7 @@ export class TaskController {
     await this.taskRepository.dbAddTask(newTask);
 
     return {
-      id: newTask.id,
-      title: newTask.title
+      message: 'Task created'
     }
   }
 
@@ -37,13 +36,15 @@ export class TaskController {
       task.title,
     ));
 
-    return taskList;
+    return taskList
   }
 
   @Put('/:id')
   async updateTask(@Param('id') id: string, @Body() taskData: UpdateTaskDTO) {
-    const updatedTask = await this.taskRepository.dbUpdateTask(id, taskData);
-    return updatedTask;
+    await this.taskRepository.dbUpdateTask(id, taskData);
+    return {
+      message: 'Task updated'
+    }
   }
 
   @Delete('/:id')
