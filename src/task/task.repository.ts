@@ -14,11 +14,16 @@ export class TaskRepository {
     return this.tasks;
   }
 
-  async dbUpdateTask(id: string, taskData: Partial<TaskEntity>) {
-    const task = this.tasks.find(taskItem => taskItem.id === id);
-    if (!task) {
+  private dbLoadTaskById(id: string) {
+    const taskById = this.tasks.find(taskItem => taskItem.id === id);
+    if (!taskById) {
       throw new Error('Task does not exists');
     }
+    return taskById
+  }
+
+  async dbUpdateTask(id: string, taskData: Partial<TaskEntity>) {
+    const task = this.dbLoadTaskById(id)
 
     Object.entries(taskData).forEach(([key, value]) => {
       if(key === 'id') {
