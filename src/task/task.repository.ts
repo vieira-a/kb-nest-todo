@@ -1,12 +1,12 @@
 import { Injectable } from '@nestjs/common';
 import { AddTaskDTO } from './dto/add-task.dto';
-import { Task } from './task.model';
+import { TaskEntity } from './task.entity';
 
 @Injectable()
 export class TaskRepository {
-  private tasks: Task[] = [];
+  private tasks: TaskEntity[] = [];
 
-  async dbAddTask(task: AddTaskDTO) {
+  async dbAddTask(task: TaskEntity) {
     this.tasks.push(task);
   }
 
