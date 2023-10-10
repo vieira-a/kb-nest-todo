@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 import { TaskRepository } from './task.repository';
@@ -42,7 +42,15 @@ export class TaskController {
 
   @Put('/:id')
   async updateTask(@Param('id') id: string, @Body() taskData: UpdateTaskDTO) {
-    const updatedTask = await this.taskRepository.updateTask(id, taskData);
+    const updatedTask = await this.taskRepository.dbUpdateTask(id, taskData);
     return updatedTask;
+  }
+
+  @Delete('/:id')
+  async deleteTask(@Param('id') id: string) {
+    await this.taskRepository.dbDeleteTask(id)
+    return {
+      message: 'Task removed'
+    }
   }
 }

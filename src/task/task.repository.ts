@@ -14,7 +14,7 @@ export class TaskRepository {
     return this.tasks;
   }
 
-  async updateTask(id: string, taskData: Partial<TaskEntity>) {
+  async dbUpdateTask(id: string, taskData: Partial<TaskEntity>) {
     const task = this.tasks.find(taskItem => taskItem.id === id);
     if (!task) {
       throw new Error('Task does not exists');
@@ -26,6 +26,15 @@ export class TaskRepository {
       }
       task[key] = value;
     })
+    return task;
+  }
+
+  async dbDeleteTask(id: string) {
+    const task = this.tasks.find(taskItem => taskItem.id === id);
+    if (!task) {
+      throw new Error('Task does not exists');
+    }
+    this.tasks = this.tasks.filter(tasksItems => tasksItems.id != id);
     return task;
   }
 }
