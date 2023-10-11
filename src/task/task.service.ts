@@ -11,7 +11,16 @@ export class TaskService {
     private taskRepository: Repository<TaskEntity>
   ) {}
 
-  async dbLoadTasks(): Promise<TaskEntity[]> {
-    return this.taskRepository.find()
+  async dbAddTask(task: TaskEntity) {
+    this.taskRepository.save(task)
+  }
+
+  async dbLoadTasks() {
+    const tasks = await this.taskRepository.find();
+    const taskList = tasks.map((task) => new LoadTaskDTO(
+      task.id,
+      task.title
+    ))
+    return taskList
   }
 }

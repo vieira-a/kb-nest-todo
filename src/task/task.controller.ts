@@ -18,12 +18,11 @@ export class TaskController {
   async addTask(@Body() task: AddTaskDTO) {
     
     const newTask = new TaskEntity();
-    newTask.id = uuidv4()
     newTask.title = task.title;
     newTask.description = task.description;
     newTask.status = task.status;
-    
-    await this.taskRepository.dbAddTask(newTask);
+
+    await this.taskService.dbAddTask(newTask)
 
     return {
       message: 'Task created'
@@ -31,7 +30,7 @@ export class TaskController {
   }
 
   @Get()
-  async loadTasks(): Promise<TaskEntity[]> {
+  async loadTasks() {
     return this.taskService.dbLoadTasks();
   }
 
