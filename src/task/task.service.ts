@@ -27,4 +27,8 @@ export class TaskService {
   async dbUpdateTask(id: string, taskData: Partial<TaskEntity>) {
     await this.taskRepository.update(id, taskData)
   }
+
+  async dbDeleteTask(id: string) {
+    await this.taskRepository.delete(id)
+  }
 }

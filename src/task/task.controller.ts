@@ -45,7 +45,7 @@ export class TaskController {
 
   @Delete('/:id')
   async deleteTask(@Param('id') id: string) {
-    await this.taskRepository.dbDeleteTask(id)
+    await this.taskService.dbDeleteTask(id)
     return {
       message: 'Task removed'
     }
