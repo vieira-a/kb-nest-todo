@@ -1,0 +1,17 @@
+src
+├── app.module.ts
+├── config
+│   └── postgres.service.ts
+├── main.ts
+└── task
+    ├── dto
+    │   ├── add-task.dto.ts
+    │   ├── load-task.dto.ts
+    │   └── update-task.dto.ts
+    ├── task.controller.ts
+    ├── task.entity.ts
+    ├── task.module.ts
+    ├── task.repository.ts
+    └── task.service.ts
+
+3 directories, 11 files
