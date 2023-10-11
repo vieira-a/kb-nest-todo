@@ -5,10 +5,14 @@ import { TaskRepository } from './task.repository';
 import { TaskEntity } from './task.entity';
 import { v4 as uuidv4 } from 'uuid';
 import { LoadTaskDTO } from './dto/load-task.dto';
+import { TaskService } from './task.service';
 
 @Controller('/task')
 export class TaskController {
-  constructor(private readonly taskRepository: TaskRepository) {}
+  constructor(
+    private readonly taskRepository: TaskRepository,
+    private readonly taskService: TaskService
+  ) {}
 
   @Post()
   async addTask(@Body() task: AddTaskDTO) {
@@ -27,16 +31,8 @@ export class TaskController {
   }
 
   @Get()
-  async loadTask() {
-
-    const allTasks = await this.taskRepository.dbLoadTask();
-
-    const taskList = allTasks.map(task => new LoadTaskDTO(
-      task.id,
-      task.title,
-    ));
-
-    return taskList
+  async loadTasks(): Promise<TaskEntity[]> {
+    return this.taskService.dbLoadTasks();
   }
 
   @Put('/:id')

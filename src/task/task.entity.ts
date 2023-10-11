@@ -1,14 +1,11 @@
 import { 
   Entity, 
-  Column, 
-  CreateDateColumn, 
-  UpdateDateColumn, 
+  Column,
   PrimaryGeneratedColumn
 } from 'typeorm';
 
-Entity({ name: 'tasks' })
+@Entity({ name: 'tasks' })
 export class TaskEntity {
-
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -20,11 +17,5 @@ export class TaskEntity {
 
   @Column({ name: 'status', nullable: false })
   status: 'open' | 'doing' | 'done';
-
-  @CreateDateColumn({ name: 'created_at'})
-  createdAt: string
-
-  @UpdateDateColumn({ name: 'updated_at'})
-  updatedAt: string
 }
 
