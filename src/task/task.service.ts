@@ -23,4 +23,8 @@ export class TaskService {
     ))
     return taskList
   }
+
+  async dbUpdateTask(id: string, taskData: Partial<TaskEntity>) {
+    await this.taskRepository.update(id, taskData)
+  }
 }

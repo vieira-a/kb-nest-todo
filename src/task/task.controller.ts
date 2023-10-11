@@ -36,7 +36,8 @@ export class TaskController {
 
   @Put('/:id')
   async updateTask(@Param('id') id: string, @Body() taskData: UpdateTaskDTO) {
-    await this.taskRepository.dbUpdateTask(id, taskData);
+    console.log('taskData', id, taskData)
+    await this.taskService.dbUpdateTask(id, taskData);
     return {
       message: 'Task updated'
     }
