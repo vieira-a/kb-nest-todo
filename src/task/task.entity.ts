@@ -1,13 +1,9 @@
-import { 
-  Entity, 
-  Column,
-  PrimaryGeneratedColumn
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'tasks' })
 export class TaskEntity {
   @PrimaryGeneratedColumn('uuid')
-  id: string
+  id: string;
 
   @Column({ name: 'title', length: 100, nullable: false })
   title: string;
@@ -18,4 +14,3 @@ export class TaskEntity {
   @Column({ name: 'status', nullable: false })
   status: 'open' | 'doing' | 'done';
 }
-

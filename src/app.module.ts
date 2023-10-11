@@ -7,13 +7,13 @@ import { TaskModule } from './task/task.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true
+      isGlobal: true,
     }),
     TypeOrmModule.forRootAsync({
       useClass: PostgresConfigService,
-      inject: [PostgresConfigService]
+      inject: [PostgresConfigService],
     }),
-    TaskModule
+    TaskModule,
   ],
   controllers: [],
   providers: [],
