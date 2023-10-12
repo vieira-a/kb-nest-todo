@@ -73,7 +73,11 @@ DB_ADMIN_EMAIL=
 ```
 npm run start
 ```
-The server will be started on the 3000 port, and you can access the following endpoints:
+Server started at `http://localhost:3000`
+
+Swagger at `http://localhost:3000/api`
+
+Now, you can access the following endpoints:
 
 > POST /task
 
