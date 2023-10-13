@@ -1,4 +1,4 @@
-import { IsNotEmpty } from 'class-validator';
+import { IsEmail, IsNotEmpty } from 'class-validator';
 
 export class SignUpDto {
   @IsNotEmpty({ message: 'O nome não pode ser vazio' })
@@ -7,7 +7,7 @@ export class SignUpDto {
   @IsNotEmpty({ message: 'O nome de usuário não pode ser vazio' })
   username: string;
 
-  @IsNotEmpty({ message: 'O email não pode ser vazio' })
+  @IsEmail({}, { message: 'O e-mail precisa ser válido' })
   email: string;
 
   @IsNotEmpty({ message: 'A senha precisa ser informada' })
