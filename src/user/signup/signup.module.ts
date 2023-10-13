@@ -8,7 +8,6 @@ import { BcryptAdapter } from '../utils/bcrypt-adapter';
 @Module({
   imports: [TypeOrmModule.forFeature([SignUpEntity])],
   controllers: [SignUpController],
-  providers: [SignUpService, BcryptAdapter]
+  providers: [SignUpService, BcryptAdapter],
 })
-
 export class SignUpModule {}

@@ -1,4 +1,11 @@
-import { Body, Controller, HttpException, HttpStatus, Post, Res } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpException,
+  HttpStatus,
+  Post,
+  Res,
+} from '@nestjs/common';
 import { Response } from 'express';
 import { SignUpService } from './signup.service';
 import { SignUpDto } from './dto/signup.dto';
@@ -10,34 +17,35 @@ export class SignUpController {
 
   @Post()
   async addUserAccount(@Body() accountData: SignUpDto, @Res() res: Response) {
-    
     try {
-      
-      if(accountData.password !== accountData.passwordConfirmation) {
+      if (accountData.password !== accountData.passwordConfirmation) {
         return res.status(HttpStatus.BAD_REQUEST).json({
-          message: 'As senhas não conferem'
-        })
+          message: 'As senhas não conferem',
+        });
       }
 
-      const newUserAccount = new SignUpEntity()
-      newUserAccount.name = accountData.name
-      newUserAccount.email = accountData.email
-      newUserAccount.username = accountData.username
-      newUserAccount.password = accountData.password
+      const newUserAccount = new SignUpEntity();
+      newUserAccount.name = accountData.name;
+      newUserAccount.email = accountData.email;
+      newUserAccount.username = accountData.username;
+      newUserAccount.password = accountData.password;
       newUserAccount.createdAt = new Date().toLocaleDateString('pt-br');
       newUserAccount.updatedAt = new Date().toLocaleDateString('pt-br');
-  
-      await this.signUpService.dbAddUserAccount(newUserAccount)
+
+      await this.signUpService.dbAddUserAccount(newUserAccount);
 
       return res.status(HttpStatus.OK).json({
-        message: 'User account created successfully'
-      })
-  
+        message: 'User account created successfully',
+      });
     } catch (error) {
-      if(error instanceof HttpException) {
-        return res.status(error.getStatus()).json({ message: error.getResponse() })
+      if (error instanceof HttpException) {
+        return res
+          .status(error.getStatus())
+          .json({ message: error.getResponse() });
       } else {
-        return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({ message: 'Failed to create user account' })
+        return res
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json({ message: 'Failed to create user account' });
       }
     }
   }

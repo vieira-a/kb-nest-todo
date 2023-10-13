@@ -1,20 +1,20 @@
 import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity({ name: 'users'})
+@Entity({ name: 'users' })
 export class SignUpEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ name: 'name'})
+  @Column({ name: 'name' })
   name: string;
 
   @Column({ name: 'username' })
   username: string;
 
-  @Column({ name: 'email'})
+  @Column({ name: 'email' })
   email: string;
 
-  @Column({ name: 'password'})
+  @Column({ name: 'password' })
   password: string;
 
   @Column({ name: 'created_at' })
@@ -22,5 +22,4 @@ export class SignUpEntity {
 
   @Column({ name: 'updated_at' })
   updatedAt: string;
-
 }

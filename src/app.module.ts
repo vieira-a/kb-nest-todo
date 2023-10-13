@@ -15,7 +15,7 @@ import { SignUpModule } from './user/signup/signup.module';
       inject: [PostgresConfigService],
     }),
     TaskModule,
-    SignUpModule
+    SignUpModule,
   ],
   controllers: [],
   providers: [],
