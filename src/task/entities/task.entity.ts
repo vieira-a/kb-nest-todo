@@ -1,10 +1,4 @@
-import { 
-  Entity, 
-  Column, 
-  PrimaryGeneratedColumn, 
-  CreateDateColumn, 
-  UpdateDateColumn 
-} from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({ name: 'tasks' })
 export class TaskEntity {
@@ -19,10 +13,10 @@ export class TaskEntity {
 
   @Column({ name: 'status', nullable: false })
   status: 'open' | 'doing' | 'done';
-  
+
   @Column({ name: 'created_at' })
   createdAt: string;
-  
+
   @Column({ name: 'updated_at' })
   updatedAt: string;
 }

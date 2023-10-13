@@ -23,7 +23,6 @@ export class TaskController {
 
   @Post()
   async addTask(@Body() task: AddTaskDTO, @Res() res: Response) {
-    const timeNow = new Date().toLocaleDateString('pt-br')
     try {
       const newTask = new TaskEntity();
       newTask.title = task.title;
