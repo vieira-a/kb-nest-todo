@@ -20,14 +20,26 @@ export class SignUpService {
     return !!userAccount;
   }
 
+  async dbCheckUserNameExists(username: string) {
+    const userAccount = await this.signUpRepository.findOne({
+      where: [{ username: username }]
+    });
+    return !!userAccount;
+  }
+
   async dbAddUserAccount(accountData: SignUpEntity) {
 
     const userEmailAlreadyExists = await this.dbCheckUserEmailExists(accountData.email)
+    const userNameAlreadyExists = await this.dbCheckUserNameExists(accountData.username)
 
     if(userEmailAlreadyExists) {
       throw new BadRequestException('Email já cadastrado')
     } 
 
+    if(userNameAlreadyExists) {
+      throw new BadRequestException('Nome de usuário já cadastrado')
+    } 
+    
     const hashedPassword = await this.bcryptAdapter.encrypt(accountData.password)
       accountData.password = hashedPassword
       await this.signUpRepository.save(accountData)
