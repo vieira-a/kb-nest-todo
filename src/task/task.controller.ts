@@ -23,11 +23,14 @@ export class TaskController {
 
   @Post()
   async addTask(@Body() task: AddTaskDTO, @Res() res: Response) {
+    const timeNow = new Date().toLocaleDateString('pt-br')
     try {
       const newTask = new TaskEntity();
       newTask.title = task.title;
       newTask.description = task.description;
       newTask.status = task.status;
+      newTask.createdAt = new Date().toLocaleDateString('pt-br');
+      newTask.updatedAt = new Date().toLocaleDateString('pt-br');
 
       await this.taskService.dbAddTask(newTask);
 
