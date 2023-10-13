@@ -36,6 +36,7 @@ export class SignUpService {
     const hashedPassword = await this.bcryptAdapter.encrypt(
       accountData.password,
     );
+    
     accountData.password = hashedPassword;
     await this.signUpRepository.save(accountData);
   }

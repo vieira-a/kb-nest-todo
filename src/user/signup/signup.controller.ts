@@ -41,7 +41,7 @@ export class SignUpController {
       if (error instanceof HttpException) {
         return res
           .status(error.getStatus())
-          .json({ message: error.getResponse() });
+          .json({ error: error.getResponse() });
       } else {
         return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
