@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
-import { TaskEntity } from './task.entity';
+import { TaskEntity } from './entities/task.entity';
 import { TaskService } from './task.service';
 import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
