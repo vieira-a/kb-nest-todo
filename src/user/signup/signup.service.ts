@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { SignUpEntity } from './entities/signup.entity';
 import { Repository } from 'typeorm';
 import { BcryptAdapter } from '../utils/bcrypt-adapter';
+import { dbCheckUserAccount } from '../utils/check-user-account';
 
 @Injectable()
 export class SignUpService {
@@ -12,18 +13,17 @@ export class SignUpService {
     private readonly signUpRepository: Repository<SignUpEntity>,
     private readonly bcryptAdapter: BcryptAdapter
   ) {}
-  
-  async dbCheckUserAccount(field: string, value: string) {
-    const userAccount = await this.signUpRepository.findOne({
-      where: { [field ]: value }
-    });
-    return !!userAccount
-  }
 
   async dbAddUserAccount(accountData: SignUpEntity) {
 
-    const userEmailAlreadyExists = await this.dbCheckUserAccount('email', accountData.email)
-    const userNameAlreadyExists = await this.dbCheckUserAccount('username', accountData.username)
+    const userEmailAlreadyExists = await dbCheckUserAccount(
+      this.signUpRepository, 
+      'email', accountData.email
+    )
+    
+    const userNameAlreadyExists = await dbCheckUserAccount(
+      this.signUpRepository, 
+      'username', accountData.username)
 
     if(userEmailAlreadyExists) {
       throw new BadRequestException('Email já cadastrado')
