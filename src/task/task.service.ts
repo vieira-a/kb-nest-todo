@@ -18,7 +18,17 @@ export class TaskService {
 
   async dbLoadTasks() {
     const tasks = await this.taskRepository.find();
-    const taskList = tasks.map((task) => new LoadTaskDTO(task.id, task.title));
+    const taskList = tasks.map(
+      (task) =>
+        new LoadTaskDTO(
+          task.id,
+          task.title,
+          task.description,
+          task.status,
+          task.createdAt,
+          task.updatedAt,
+        ),
+    );
     return taskList;
   }
 
