@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { SignUpEntity } from './entities/signup.entity';
 import { Repository } from 'typeorm';
@@ -39,5 +43,17 @@ export class SignUpService {
 
     accountData.password = hashedPassword;
     await this.signUpRepository.save(accountData);
+  }
+
+  async dbLoadUserAccount(username: string) {
+    const userNameAlreadyExists = await dbCheckUserAccount(
+      this.signUpRepository,
+      'username',
+      username,
+    );
+    if (!userNameAlreadyExists) {
+      throw new UnauthorizedException('Usuário não encontrado');
+    }
+    return await this.signUpRepository.findOneBy({ username: username });
   }
 }
