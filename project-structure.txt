@@ -2,16 +2,41 @@ src
 ├── app.module.ts
 ├── config
 │   └── postgres.service.ts
+├── db
+│   ├── data-source.ts
+│   └── migrations
+│       ├── 1697560445200-init-default-schemas.ts
+│       └── 1697560534763-mapper-user-to-tasks.ts
 ├── main.ts
-└── task
-    ├── dto
-    │   ├── add-task.dto.ts
-    │   ├── load-task.dto.ts
-    │   └── update-task.dto.ts
-    ├── task.controller.ts
-    ├── task.entity.ts
-    ├── task.module.ts
-    ├── task.repository.ts
-    └── task.service.ts
+├── task
+│   ├── dto
+│   │   ├── add-task.dto.ts
+│   │   ├── load-task.dto.ts
+│   │   └── update-task.dto.ts
+│   ├── entities
+│   │   └── task.entity.ts
+│   ├── task.controller.ts
+│   ├── task.module.ts
+│   └── task.service.ts
+└── user
+    ├── constants.ts
+    ├── login
+    │   ├── dto
+    │   │   └── login.dto.ts
+    │   ├── login.controller.ts
+    │   ├── login.module.ts
+    │   └── login.service.ts
+    ├── signup
+    │   ├── dto
+    │   │   └── signup.dto.ts
+    │   ├── entities
+    │   │   └── signup.entity.ts
+    │   ├── signup.controller.ts
+    │   ├── signup.module.ts
+    │   └── signup.service.ts
+    └── utils
+        ├── bcrypt-adapter.ts
+        ├── check-user-account.ts
+        └── index.ts
 
-3 directories, 11 files
+13 directories, 26 files

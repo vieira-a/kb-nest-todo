@@ -39,17 +39,40 @@ src
 ├── app.module.ts
 ├── config
 │   └── postgres.service.ts
+├── db
+│   ├── data-source.ts
+│   └── migrations
 ├── main.ts
-└── task
-    ├── dto
-    │   ├── add-task.dto.ts
-    │   ├── load-task.dto.ts
-    │   └── update-task.dto.ts
-    ├── task.controller.ts
-    ├── task.entity.ts
-    ├── task.module.ts
-    ├── task.repository.ts
-    └── task.service.ts
+├── task
+│   ├── dto
+│   │   ├── add-task.dto.ts
+│   │   ├── load-task.dto.ts
+│   │   └── update-task.dto.ts
+│   ├── entities
+│   │   └── task.entity.ts
+│   ├── task.controller.ts
+│   ├── task.module.ts
+│   └── task.service.ts
+└── user
+    ├── constants.ts
+    ├── login
+    │   ├── dto
+    │   │   └── login.dto.ts
+    │   ├── login.controller.ts
+    │   ├── login.module.ts
+    │   └── login.service.ts
+    ├── signup
+    │   ├── dto
+    │   │   └── signup.dto.ts
+    │   ├── entities
+    │   │   └── signup.entity.ts
+    │   ├── signup.controller.ts
+    │   ├── signup.module.ts
+    │   └── signup.service.ts
+    └── utils
+        ├── bcrypt-adapter.ts
+        ├── check-user-account.ts
+        └── index.ts
 ```
 **3 - Install dependencies**
 ```
@@ -63,6 +86,7 @@ DB_USERNAME=
 DB_PASSWORD=
 DB_NAME=
 DB_ADMIN_EMAIL=
+SECRET=
 ```
 **5 - Create and execute the Postgres docker image**
 *The docker-compose.yml file uses the .env references*
@@ -130,5 +154,23 @@ Now, you can access the following endpoints:
   "message": "Tasks deleted successfully",
 }
 ```
+
+> GET /login
+
+*Get JWT token*
+
+**Response**
+```
+{
+  "message": "Login successfully",
+  "token": "jwt_token
+}
+```
+
+**Release notes (on develop)**
+
+- Implemented signup use case
+- Create relationship between Task and User
+- Implemented login use case with JWT token generation
 
 Made by [Anderson Vieira](https://linkedin/in/vieira-a)
