@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { SignUpEntity } from '../../user/signup/entities/signup.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
 
 @Entity({ name: 'tasks' })
 export class TaskEntity {
@@ -19,4 +20,7 @@ export class TaskEntity {
 
   @Column({ name: 'updated_at' })
   updatedAt: string;
+
+  @ManyToOne(() => SignUpEntity, (user) => user.tasks)
+  user: SignUpEntity;
 }
