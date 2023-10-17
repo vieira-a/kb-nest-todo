@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { PostgresConfigService } from './config/postgres.service';
 import { TaskModule } from './task/task.module';
 import { SignUpModule } from './user/signup/signup.module';
+import { LoginModule } from './user/login/login.module';
 
 @Module({
   imports: [
@@ -16,8 +17,7 @@ import { SignUpModule } from './user/signup/signup.module';
     }),
     TaskModule,
     SignUpModule,
+    LoginModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}
