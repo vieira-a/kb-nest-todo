@@ -24,12 +24,12 @@
   
   **Requeriments**
   
-  - [ ] Only signed user (with token) can create tasks
+  - [x] Only signed user (with token) can create tasks
 
   **Exceptions**
 
-  - [ ] Return 400 if token is not provided
-  - [ ] Return 500 if throws an error
+  - [x] Return 401 if token is not provided
+  - [x] Return 500 if throws an error
 
   **Success**
 

@@ -8,7 +8,9 @@ import {
   Post,
   Put,
   Res,
+  UseGuards
 } from '@nestjs/common';
+import { AuthGuard } from 'src/user/auth.guard';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 import { TaskEntity } from './entities/task.entity';
@@ -21,6 +23,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class TaskController {
   constructor(private readonly taskService: TaskService) {}
 
+  @UseGuards(AuthGuard)
   @Post()
   async addTask(@Body() task: AddTaskDTO, @Res() res: Response) {
     try {
