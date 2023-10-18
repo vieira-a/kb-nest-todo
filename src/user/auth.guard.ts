@@ -24,7 +24,7 @@ export class AuthGuard implements CanActivate {
       });
       request['id'] = payload;
     } catch (error) {
-      console.log(error.message)
+      console.log(error.message);
       throw new UnauthorizedException('Erro ao carregar dados do usuário');
     }
     return true;

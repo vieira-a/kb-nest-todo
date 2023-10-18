@@ -8,7 +8,7 @@ import {
   Post,
   Put,
   Res,
-  UseGuards
+  UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from 'src/user/auth.guard';
 import { AddTaskDTO } from './dto/add-task.dto';
@@ -47,6 +47,7 @@ export class TaskController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   async loadTasks(@Res() res: Response) {
     try {
@@ -64,6 +65,7 @@ export class TaskController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Put('/:id')
   async updateTask(
     @Param('id') id: string,
@@ -83,6 +85,7 @@ export class TaskController {
     }
   }
 
+  @UseGuards(AuthGuard)
   @Delete('/:id')
   async deleteTask(@Param('id') id: string, @Res() res: Response) {
     try {
