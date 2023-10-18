@@ -5,6 +5,7 @@ import { PostgresConfigService } from './config/postgres.service';
 import { TaskModule } from './task/task.module';
 import { SignUpModule } from './user/signup/signup.module';
 import { LoginModule } from './user/login/login.module';
+import { ProfileModule } from './user/profile/profile.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { LoginModule } from './user/login/login.module';
     TaskModule,
     SignUpModule,
     LoginModule,
+    ProfileModule,
   ],
 })
 export class AppModule {}
