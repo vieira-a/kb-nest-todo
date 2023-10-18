@@ -56,4 +56,16 @@ export class SignUpService {
     }
     return await this.signUpRepository.findOneBy({ username: username });
   }
+
+  async dbLoadUserAccountById(id: string) {
+    const idAlreadyExists = await dbCheckUserAccount(
+      this.signUpRepository,
+      'id',
+      id,
+    );
+    if (!idAlreadyExists) {
+      throw new UnauthorizedException('Usuário não encontrado');
+    }
+    return await this.signUpRepository.findOneBy({ id: id });
+  }
 }
