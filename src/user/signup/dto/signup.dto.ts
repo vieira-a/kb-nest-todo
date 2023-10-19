@@ -7,31 +7,27 @@ import {
 } from 'class-validator';
 
 export class SignUpDto {
-  @IsNotEmpty({ message: 'O nome precisa ser informado' })
-  @IsString({ message: 'O nome deve conter caracteres válidos' })
-  @MinLength(3, { message: 'O nome deve possuir mais de 3 caracteres' })
+  @IsNotEmpty({ message: 'Name must not be empty' })
+  @IsString({ message: 'Name must be valid characters' })
+  @MinLength(3, { message: 'Name must have 3 or more characters' })
   name: string;
 
-  @IsNotEmpty({ message: 'O nome de usuário precisa ser informado' })
+  @IsNotEmpty({ message: 'Username must not be empty' })
   username: string;
 
-  @IsNotEmpty({ message: 'O e-mail precisa ser informado' })
-  @IsEmail({}, { message: 'O e-mail precisa ser válido' })
+  @IsNotEmpty({ message: 'Email must not be empty' })
+  @IsEmail({}, { message: 'Must be a valid email' })
   email: string;
 
-  @IsNotEmpty({ message: 'A senha precisa ser informada' })
-  @IsStrongPassword(
-    {},
-    { message: 'A senha deve obedecer a critérios de complexidade' },
-  )
+  @IsNotEmpty({ message: 'Password must not be empty' })
+  @IsStrongPassword({}, { message: 'Password must meet complexity criteria' })
   password: string;
 
-  @IsNotEmpty({ message: 'A confirmação de senha precisa ser informada' })
+  @IsNotEmpty({ message: 'Password confirmation must not be empty' })
   @IsStrongPassword(
     {},
     {
-      message:
-        'A confirmação de senha deve obedecer a critérios de complexidade',
+      message: 'Password confirmation must meet complexity criteria',
     },
   )
   passwordConfirmation: string;
