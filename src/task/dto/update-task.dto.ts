@@ -6,7 +6,6 @@ export class UpdateTaskDto {
     description: 'Task title',
     example: 'Do something',
   })
-  
   @IsOptional()
   title: string;
 
@@ -14,7 +13,6 @@ export class UpdateTaskDto {
     description: 'Task description',
     example: 'Make it happen',
   })
-  
   @IsOptional()
   description: string;
 
@@ -22,7 +20,6 @@ export class UpdateTaskDto {
     description: 'Task status',
     example: `open | doing | done`,
   })
-  
   @IsOptional()
   status: 'open' | 'doing' | 'done';
 }
