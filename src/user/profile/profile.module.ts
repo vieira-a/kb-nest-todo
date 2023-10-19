@@ -7,6 +7,6 @@ import { ProfileController } from './profile.controller';
   imports: [SignUpModule],
   providers: [ProfileService],
   controllers: [ProfileController],
-  exports: [ProfileService]
+  exports: [ProfileService],
 })
 export class ProfileModule {}

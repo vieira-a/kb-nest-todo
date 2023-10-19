@@ -6,10 +6,7 @@ import { TaskService } from './task.service';
 import { ProfileModule } from '../user/profile/profile.module';
 
 @Module({
-  imports: [
-    ProfileModule,
-    TypeOrmModule.forFeature([TaskEntity])
-  ],
+  imports: [ProfileModule, TypeOrmModule.forFeature([TaskEntity])],
   controllers: [TaskController],
   providers: [TaskService],
 })
