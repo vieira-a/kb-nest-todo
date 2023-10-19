@@ -10,6 +10,7 @@ import { UseGuards } from '@nestjs/common';
 import { AuthGuard } from '../auth.guard';
 import { ProfileService } from './profile.service';
 import { Response } from 'express';
+import { extractToken } from '../utils';
 
 @Controller('/profile')
 export class ProfileController {
@@ -19,7 +20,7 @@ export class ProfileController {
   @Post()
   async getUserProfile(@Request() request: Request, @Res() res: Response) {
     try {
-      const token = request.headers['authorization']?.split(' ')[1];
+      const token = extractToken(request);
       const userAccount = await this.profileService.loadUserProfile(token);
       return res.status(HttpStatus.OK).json({
         message: 'User data loaded successfully',
