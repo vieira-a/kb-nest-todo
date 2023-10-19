@@ -22,5 +22,5 @@ export class TaskEntity {
   updatedAt: string;
 
   @ManyToOne(() => SignUpEntity, (user) => user.tasks)
-  user: SignUpEntity;
+  user: SignUpEntity | string;
 }

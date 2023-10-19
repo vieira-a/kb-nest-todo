@@ -7,32 +7,41 @@ import {
   Param,
   Post,
   Put,
+  Request,
   Res,
   UseGuards,
 } from '@nestjs/common';
-import { AuthGuard } from 'src/user/auth.guard';
+import { Response } from 'express';
+import { ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from '../user/auth.guard';
 import { AddTaskDTO } from './dto/add-task.dto';
 import { UpdateTaskDTO } from './dto/update-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { TaskService } from './task.service';
-import { Response } from 'express';
-import { ApiTags } from '@nestjs/swagger';
+import { ProfileService } from '../user/profile/profile.service';
 
 @ApiTags('tasks')
 @Controller('/task')
 export class TaskController {
-  constructor(private readonly taskService: TaskService) {}
+  constructor(
+    private readonly taskService: TaskService,
+    private readonly profileService: ProfileService
+  ) {}
 
   @UseGuards(AuthGuard)
   @Post()
-  async addTask(@Body() task: AddTaskDTO, @Res() res: Response) {
+  async addTask(@Request() request: Request, @Body() task: AddTaskDTO, @Res() res: Response) {
     try {
+      const token = request.headers['authorization']?.split(' ')[1];
+      const userAccount = await this.profileService.loadUserProfile(token)
+
       const newTask = new TaskEntity();
       newTask.title = task.title;
       newTask.description = task.description;
       newTask.status = task.status;
       newTask.createdAt = new Date().toLocaleDateString('pt-br');
       newTask.updatedAt = new Date().toLocaleDateString('pt-br');
+      newTask.user = userAccount.id;
 
       await this.taskService.dbAddTask(newTask);
 

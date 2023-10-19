@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ProfileDto } from './dto/profile.dto';
 import { JwtService } from '@nestjs/jwt';
 import { jwtContants } from '../constants';
+import { ProfileDto } from './dto/profile.dto';
 import { SignUpService } from '../signup/signup.service';
 
 @Injectable()

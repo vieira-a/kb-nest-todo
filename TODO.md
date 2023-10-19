@@ -33,7 +33,7 @@
 
   **Success**
 
-  - [ ] The AddTask usecase receives a user token, extract the userId and generate new task
-  - [ ] Get user account by id
-  - [ ] Insert userId on the task creation
+  - [x] The AddTask usecase receives a user token, extract the userId and generate new task
+  - [x] Get user account by id
+  - [x] Insert userId on the task creation
   
