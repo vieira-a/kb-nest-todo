@@ -23,6 +23,7 @@ export class AuthGuard implements CanActivate {
         secret: jwtContants.secret,
       });
       request['id'] = payload;
+      console.log('AuthGuard payload value', payload)
     } catch (error) {
       console.log(error.message);
       throw new UnauthorizedException('Failed to load user data');
