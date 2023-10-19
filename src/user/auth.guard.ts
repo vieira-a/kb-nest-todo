@@ -5,7 +5,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtContants } from './constants';
+import { jwtConstants } from './constants';
 import { Request } from 'express';
 
 @Injectable()
@@ -19,14 +19,12 @@ export class AuthGuard implements CanActivate {
       throw new UnauthorizedException('Token not provided');
     }
     try {
-      const payload = await this.jwtService.verifyAsync(token, {
-        secret: jwtContants.secret,
+      await this.jwtService.verifyAsync(token, {
+        secret: jwtConstants.secret,
       });
-      request['id'] = payload;
-      console.log('AuthGuard payload value', payload)
     } catch (error) {
       console.log(error.message);
-      throw new UnauthorizedException('Failed to load user data');
+      throw new UnauthorizedException('Invalid token');
     }
     return true;
   }

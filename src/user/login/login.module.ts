@@ -4,14 +4,14 @@ import { LoginService } from './login.service';
 import { SignUpModule } from '../signup/signup.module';
 import { BcryptAdapter } from '../utils';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtContants } from '../constants';
+import { jwtConstants } from '../constants';
 
 @Module({
   imports: [
     SignUpModule,
     JwtModule.register({
       global: true,
-      secret: jwtContants.secret,
+      secret: jwtConstants.secret,
       signOptions: { expiresIn: '1d' },
     }),
   ],

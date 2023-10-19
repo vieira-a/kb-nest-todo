@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { jwtContants } from '../constants';
+import { jwtConstants } from '../constants';
 import { ProfileDto } from './dto/profile.dto';
 import { SignUpService } from '../signup/signup.service';
 
@@ -13,7 +13,7 @@ export class ProfileService {
 
   async loadUserProfile(token: string): Promise<ProfileDto> {
     const payload = await this.jwtService.verifyAsync(token, {
-      secret: jwtContants.secret,
+      secret: jwtConstants.secret,
     });
     const userAccount = await this.signUpService.dbLoadUserAccountById(
       payload.id,
