@@ -15,7 +15,7 @@ import { Response } from 'express';
 import { ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from '../user/auth.guard';
 import { AddTaskDTO } from './dto/add-task.dto';
-import { UpdateTaskDTO } from './dto/update-task.dto';
+import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { TaskService } from './task.service';
 import { ProfileService } from '../user/profile/profile.service';
@@ -82,7 +82,7 @@ export class TaskController {
   @Put('/:id')
   async updateTask(
     @Param('id') id: string,
-    @Body() taskData: UpdateTaskDTO,
+    @Body() taskData: UpdateTaskDto,
     @Res() res: Response,
   ) {
     try {

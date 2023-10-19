@@ -1,12 +1,12 @@
-import { IsNotEmpty, IsOptional } from 'class-validator';
+import { IsOptional } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UpdateTaskDTO {
+export class UpdateTaskDto {
   @ApiProperty({
     description: 'Task title',
     example: 'Do something',
   })
-  @IsNotEmpty({ message: 'O título não pode ser vazio' })
+  
   @IsOptional()
   title: string;
 
@@ -14,7 +14,7 @@ export class UpdateTaskDTO {
     description: 'Task description',
     example: 'Make it happen',
   })
-  @IsNotEmpty({ message: 'A descrição não pode ser vazia' })
+  
   @IsOptional()
   description: string;
 
@@ -22,7 +22,7 @@ export class UpdateTaskDTO {
     description: 'Task status',
     example: `open | doing | done`,
   })
-  @IsNotEmpty({ message: 'O status não pode ser vazio' })
+  
   @IsOptional()
   status: 'open' | 'doing' | 'done';
 }
