@@ -6,20 +6,20 @@ export class AddTaskDTO {
     description: 'Task title',
     example: 'Do something',
   })
-  @IsNotEmpty({ message: 'O título não pode ser vazio' })
+  @IsNotEmpty({ message: 'Task title must not be empty' })
   title: string;
 
   @ApiProperty({
     description: 'Task description',
     example: 'Make it happen',
   })
-  @IsNotEmpty({ message: 'A descrição não pode ser vazia' })
+  @IsNotEmpty({ message: 'Task description must not be empty' })
   description: string;
 
   @ApiProperty({
     description: 'Task status',
     example: `open | doing | done`,
   })
-  @IsNotEmpty({ message: 'O status não pode ser vazio' })
+  @IsNotEmpty({ message: 'Task status must not be empty' })
   status: 'open' | 'doing' | 'done';
 }

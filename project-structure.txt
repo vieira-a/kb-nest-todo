@@ -5,8 +5,6 @@ src
 ├── db
 │   ├── data-source.ts
 │   └── migrations
-│       ├── 1697560445200-init-default-schemas.ts
-│       └── 1697560534763-mapper-user-to-tasks.ts
 ├── main.ts
 ├── task
 │   ├── dto
@@ -19,6 +17,7 @@ src
 │   ├── task.module.ts
 │   └── task.service.ts
 └── user
+    ├── auth.guard.ts
     ├── constants.ts
     ├── login
     │   ├── dto
@@ -26,6 +25,12 @@ src
     │   ├── login.controller.ts
     │   ├── login.module.ts
     │   └── login.service.ts
+    ├── profile
+    │   ├── dto
+    │   │   └── profile.dto.ts
+    │   ├── profile.controller.ts
+    │   ├── profile.module.ts
+    │   └── profile.service.ts
     ├── signup
     │   ├── dto
     │   │   └── signup.dto.ts
@@ -39,4 +44,4 @@ src
         ├── check-user-account.ts
         └── index.ts
 
-13 directories, 26 files
+15 directories, 29 files

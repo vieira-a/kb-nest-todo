@@ -19,7 +19,7 @@ export class LoginController {
     try {
       const token = await this.loginService.getToken(loginData);
       return res.status(HttpStatus.OK).json({
-        message: 'Login efetuado com sucesso',
+        message: 'User successfully authenticated',
         token: token,
       });
     } catch (error) {
@@ -30,7 +30,7 @@ export class LoginController {
       } else {
         return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .json({ message: 'Falha na tentativa de login', error });
+          .json({ message: 'Authentication failure', error });
       }
     }
   }

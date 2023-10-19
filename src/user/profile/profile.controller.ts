@@ -22,7 +22,7 @@ export class ProfileController {
       const token = request.headers['authorization']?.split(' ')[1];
       const userAccount = await this.profileService.loadUserProfile(token);
       return res.status(HttpStatus.OK).json({
-        message: 'Conta de usuário carregada com sucesso',
+        message: 'User data loaded successfully',
         data: userAccount,
       });
     } catch (error) {
@@ -33,7 +33,7 @@ export class ProfileController {
       } else {
         return res
           .status(HttpStatus.INTERNAL_SERVER_ERROR)
-          .json({ message: 'Falha ao carregar dados do usuário', error });
+          .json({ message: 'Failed to load user data', error });
       }
     }
   }

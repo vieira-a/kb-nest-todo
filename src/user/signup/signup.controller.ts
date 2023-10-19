@@ -20,7 +20,7 @@ export class SignUpController {
     try {
       if (accountData.password !== accountData.passwordConfirmation) {
         return res.status(HttpStatus.BAD_REQUEST).json({
-          message: 'As senhas não conferem',
+          message: 'Passwords not match',
         });
       }
 
