@@ -25,15 +25,19 @@ import { ProfileService } from '../user/profile/profile.service';
 export class TaskController {
   constructor(
     private readonly taskService: TaskService,
-    private readonly profileService: ProfileService
+    private readonly profileService: ProfileService,
   ) {}
 
   @UseGuards(AuthGuard)
   @Post()
-  async addTask(@Request() request: Request, @Body() task: AddTaskDTO, @Res() res: Response) {
+  async addTask(
+    @Request() request: Request,
+    @Body() task: AddTaskDTO,
+    @Res() res: Response,
+  ) {
     try {
       const token = request.headers['authorization']?.split(' ')[1];
-      const userAccount = await this.profileService.loadUserProfile(token)
+      const userAccount = await this.profileService.loadUserProfile(token);
 
       const newTask = new TaskEntity();
       newTask.title = task.title;
