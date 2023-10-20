@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { LoadTaskDTO } from './dto/load-task.dto';
 import { TaskEntity } from './entities/task.entity';
+import { SignUpEntity } from '../user/signup/entities/signup.entity';
+import { LoadTaskDTO } from './dto/load-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { SignUpEntity } from 'src/user/signup/entities/signup.entity';
 
 @Injectable()
 export class TaskService {
@@ -37,7 +37,11 @@ export class TaskService {
     await this.taskRepository.update(id, taskData);
   }
 
-  async dbDeleteTask(id: string) {
-    await this.taskRepository.delete(id);
+  async dbDeleteTask(id: string, user: SignUpEntity) {
+    const result = await this.taskRepository.delete({
+      id: id,
+      user: user,
+    });
+    return result;
   }
 }

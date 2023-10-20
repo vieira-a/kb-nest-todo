@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
   HttpStatus,
   Param,
   Post,
@@ -97,7 +98,6 @@ export class TaskController {
   ) {
     try {
       await this.taskService.dbUpdateTask(id, taskData);
-
       return res.status(HttpStatus.OK).json({
         message: 'Task updated successfully',
       });
@@ -111,18 +111,39 @@ export class TaskController {
 
   @UseGuards(AuthGuard)
   @Delete('/:id')
-  async deleteTask(@Param('id') id: string, @Res() res: Response) {
+  async deleteTask(
+    @Request() request: Request,
+    @Param('id') id: string,
+    @Res() res: Response,
+  ) {
     try {
-      await this.taskService.dbDeleteTask(id);
+      const token = extractToken(request);
+
+      const userAccount = await this.profileService.loadUserProfile(token);
+      const user = new SignUpEntity();
+      user.id = userAccount.id;
+
+      const result = await this.taskService.dbDeleteTask(id, user);
+
+      if (result.affected === 0) {
+        return res.status(HttpStatus.NOT_FOUND).json({
+          message: 'There is no task to delete',
+        });
+      }
 
       return res.status(HttpStatus.OK).json({
         message: 'Task deleted successfully',
       });
     } catch (error) {
-      return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-        message: 'Failed to delete task',
-        error: error.message,
-      });
+      if (error instanceof HttpException) {
+        return res
+          .status(error.getStatus())
+          .json({ error: error.getResponse() });
+      } else {
+        return res
+          .status(HttpStatus.INTERNAL_SERVER_ERROR)
+          .json({ message: 'Failed to delete task', error });
+      }
     }
   }
 }

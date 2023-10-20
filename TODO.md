@@ -25,6 +25,8 @@
   **Requeriments**
   
   - [x] Only signed user (with token) can create tasks
+  - [x] Only signed user (with token) can delete your own task
+
 
   **Exceptions**
 
@@ -36,4 +38,8 @@
   - [x] The AddTask usecase receives a user token, extract the userId and generate new task
   - [x] Get user account by id
   - [x] Insert userId on the task creation
+
+### Other API routes
+
+ - [x] Get tasks by user id
   
