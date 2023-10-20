@@ -19,6 +19,8 @@ import { UpdateTaskDto } from './dto/update-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { TaskService } from './task.service';
 import { ProfileService } from '../user/profile/profile.service';
+import { SignUpEntity } from 'src/user/signup/entities/signup.entity';
+import { extractToken } from '../user/utils';
 
 @ApiTags('tasks')
 @Controller('/task')
@@ -36,8 +38,11 @@ export class TaskController {
     @Res() res: Response,
   ) {
     try {
-      const token = request.headers['authorization']?.split(' ')[1];
+      const token = extractToken(request);
+
       const userAccount = await this.profileService.loadUserProfile(token);
+      const user = new SignUpEntity();
+      user.id = userAccount.id;
 
       const newTask = new TaskEntity();
       newTask.title = task.title;
@@ -45,10 +50,9 @@ export class TaskController {
       newTask.status = task.status;
       newTask.createdAt = new Date().toLocaleDateString('pt-br');
       newTask.updatedAt = new Date().toLocaleDateString('pt-br');
-      newTask.user = userAccount.id;
+      newTask.user = user;
 
       await this.taskService.dbAddTask(newTask);
-
       return res.status(HttpStatus.CREATED).json({
         message: 'Task created successfully',
       });
@@ -62,9 +66,15 @@ export class TaskController {
 
   @UseGuards(AuthGuard)
   @Get()
-  async loadTasks(@Res() res: Response) {
+  async loadTaskByUser(@Request() request: Request, @Res() res: Response) {
     try {
-      const taskList = await this.taskService.dbLoadTasks();
+      const token = extractToken(request);
+
+      const userAccount = await this.profileService.loadUserProfile(token);
+      const user = new SignUpEntity();
+      user.id = userAccount.id;
+
+      const taskList = await this.taskService.dbLoadTaskByUser(user);
 
       return res.status(HttpStatus.OK).json({
         message: 'Tasks loaded successfully',
@@ -87,6 +97,7 @@ export class TaskController {
   ) {
     try {
       await this.taskService.dbUpdateTask(id, taskData);
+
       return res.status(HttpStatus.OK).json({
         message: 'Task updated successfully',
       });
@@ -103,6 +114,7 @@ export class TaskController {
   async deleteTask(@Param('id') id: string, @Res() res: Response) {
     try {
       await this.taskService.dbDeleteTask(id);
+
       return res.status(HttpStatus.OK).json({
         message: 'Task deleted successfully',
       });

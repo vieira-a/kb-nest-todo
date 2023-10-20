@@ -4,6 +4,7 @@ import { Repository } from 'typeorm';
 import { LoadTaskDTO } from './dto/load-task.dto';
 import { TaskEntity } from './entities/task.entity';
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { SignUpEntity } from 'src/user/signup/entities/signup.entity';
 
 @Injectable()
 export class TaskService {
@@ -16,8 +17,8 @@ export class TaskService {
     this.taskRepository.save(task);
   }
 
-  async dbLoadTasks() {
-    const tasks = await this.taskRepository.find();
+  async dbLoadTaskByUser(id: SignUpEntity) {
+    const tasks = await this.taskRepository.findBy({ user: id });
     const taskList = tasks.map(
       (task) =>
         new LoadTaskDTO(
